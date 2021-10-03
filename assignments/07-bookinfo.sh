@@ -17,12 +17,12 @@ docker run -d --name details -p 8081:8081 details
 # Review service
 docker build -t reviews .
 
-docker run -d --name reviews -p 8082:8082 --link ratings:ratings \
-    -e ENABLE_RATINGS=true -e 'RATINGS_SERVICE=ratings' reviews
+docker run -d --name reviews -p :8082:8082 --link ratings:ratings \
+    -e ENABLE_RATINGS=true -e 'RATINGS_SERVICE=http://ratings:8080' reviews
 
 # Productpage service
 docker build -t productpage .
 
 docker run -d --name productpage -p 8083:8083 --link details:details --link ratings:ratings --link reviews:reviews \
-    -e 'DETAILS_HOSTNAME=details' -e 'RATINGS_HOSTNAME=ratings' -e 'REVIEWS_HOSTNAME=reviews' productpage
+    -e 'DETAILS_HOSTNAME=http://details:8081' -e 'RATINGS_HOSTNAME=http://ratings:8080' -e 'REVIEWS_HOSTNAME=http://reviews:9080' productpage
 

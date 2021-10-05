@@ -10,7 +10,6 @@ docker run -d --name ratings -p 8080:8080 --link mongodb:mongodb \
   -e SERVICE_VERSION=v2 -e 'MONGO_DB_URL=mongodb://mongodb:27017/ratings' ratings
   
 # Rating service with authentication
-
 # docker run -d --name mongodb -p 27017:27017 -e MONGODB_USERNAME=ratings -e MONGODB_PASSWORD=CHANGEME -e MONGODB_DATABASE=ratings \
 #   -v $(pwd)/databases:/docker-entrypoint-initdb.d bitnami/mongodb:5.0.2-debian-10-r2 
 
